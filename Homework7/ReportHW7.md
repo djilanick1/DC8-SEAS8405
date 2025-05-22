@@ -10,7 +10,7 @@ The purpose of this assignment is to step into the cybersecurity architects shoe
 
 ## Part 1: Environment Setup
 
-1. **Understand the Application:**
+### 1. **Understand the Application:**
    Manually reviewing the app.py flask code reveals these vulnerabilities:
 
 | **Vunerabilities**              | **Code where to find**                                  | **Risk**                                                          |
@@ -20,7 +20,7 @@ The purpose of this assignment is to step into the cybersecurity architects shoe
 | Insecure eval ()                | result = eval(expression)                               | Risk: Remote Code Execution (RCE)                                 |
 
 
-2. **Run the Environment:**
+### 2. **Run the Environment:**
    - Use `make start` to launch the application: to do this, i had to install Docker Compose and restart the docker daemon
    - Test the endpoints: `/`, `/ping?ip=8.8.8.8`, and `/calculate?expr=2+3`.
      ![image](https://github.com/user-attachments/assets/f29e71e3-aa4a-41f4-9b20-3d49623cf68f)
@@ -28,15 +28,14 @@ The purpose of this assignment is to step into the cybersecurity architects shoe
 When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; this means the Flask app crashed while trying to process the request to /calculate?expr=2+3. This is due to the fact that passing 2+3 in the query string is one thing, but the + is being interpreted as a space, not as the + character. In URLs, + is URL-encoded as %2B. To correct this, i ran $curl "http://localhost:15000/calculate?expr=2%2B3" result 5
 
 
-3. **Initial Scanning:**
+### 3. **Initial Scanning:**
    - Run `make check`, `make scan`, and `make host-security`. To perform thes command, installation of docker-scout was needed, follow by the creation of a new docker ID, with EC2 device confirmation on Docker Hub. I have also update the Makefile, changing docker scout to docker-scout.
    - Vulnerabilities and misconfigurations: the below was extractd from the files before_scan.txt and before_host-security.txt
 
----
 
-## 1.3.1. Host & Container Misconfigurations (Docker Bench)
+  #### 1.3.1. Host & Container Misconfigurations (Docker Bench)
 
-### High-Priority Issues Identified:
+###### High-Priority Issues Identified:
 
 | **ID**     | **Description**                                                                 |
 |------------|----------------------------------------------------------------------------------|
@@ -56,14 +55,13 @@ When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; th
 | 5.10–5.14  | Missing CPU/memory limits, PID cgroup limits, exposed ports, and read/write FS   |
 | 5.25–5.28  | Containers not restricted from acquiring additional privileges                   |
 
----
 
-## 1.3.2. Docker Image Vulnerabilities (Docker Scout)
+#### 1.3.2. Docker Image Vulnerabilities (Docker Scout)
 
-### Image Scanned: `mywebapp:latest`  
+###### Image Scanned: `mywebapp:latest`  
 **Base image:** `python:3.9-alpine`
 
-###  Vulnerabilities Found:
+#####  Vulnerabilities Found:
 - **High:** 3
 - **Medium:** 1     
 
