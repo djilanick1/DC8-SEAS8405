@@ -21,7 +21,7 @@ The purpose of this assignment is to step into the cybersecurity architects shoe
 
 
 2. **Run the Environment:**
-   - Use `make start` to launch the application.
+   - Use `make start` to launch the application: to do this, i had to install Docker Compose and restart the docker daemon
    - Test the endpoints: `/`, `/ping?ip=8.8.8.8`, and `/calculate?expr=2+3`.
 
 3. **Initial Scanning:**
