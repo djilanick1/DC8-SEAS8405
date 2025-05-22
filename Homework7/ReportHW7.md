@@ -29,7 +29,7 @@ When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; th
 
 
 3. **Initial Scanning:**
-   - Run `make check`, `make scan`, and `make host-security`.
+   - Run `make check`, `make scan`, and `make host-security`. To perform thes command, installation of docker-scout was needed, follow by the creation of a new docker ID, with EC2 device confirmation on Docker Hub. I have also update the Makefile, changing docker scout to docker-scout.
    - Record identified vulnerabilities and misconfigurations.
 
 ## Part 2: Secure the App and Container
