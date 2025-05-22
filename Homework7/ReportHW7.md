@@ -30,7 +30,42 @@ When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; th
 
 3. **Initial Scanning:**
    - Run `make check`, `make scan`, and `make host-security`. To perform thes command, installation of docker-scout was needed, follow by the creation of a new docker ID, with EC2 device confirmation on Docker Hub. I have also update the Makefile, changing docker scout to docker-scout.
-   - Record identified vulnerabilities and misconfigurations.
+   - Vulnerabilities and misconfigurations: the below was extractd from the files before_scan.txt and before_host-security.txt
+
+---
+
+## 1.3.1. Host & Container Misconfigurations (Docker Bench)
+
+### High-Priority Issues Identified:
+
+| **ID**     | **Description**                                                                 |
+|------------|----------------------------------------------------------------------------------|
+| 1.1        | No separate partition for containers                                             |
+| 1.5        | Auditing for Docker daemon is not configured                                     |
+| 2.1        | Network traffic is not restricted between containers on default bridge           |
+| 2.8        | User namespace support is disabled                                               |
+| 2.11       | No authorization configured for Docker client commands                           |
+| 2.12       | Centralized and remote logging not configured                                    |
+| 2.14–2.15  | Live restore and userland proxy not configured properly                          |
+| 2.18       | Containers not restricted from acquiring new privileges                          |
+| 3.15       | Docker socket has incorrect ownership (`/var/run/docker.sock`)                   |
+| 4.1        | Containers running as root user (`before-db-1`)                                  |
+| 4.5        | Docker Content Trust not enabled                                                 |
+| 4.6        | No healthcheck instructions for multiple images                                  |
+| 5.2        | SELinux not enabled or configured for containers                                 |
+| 5.10–5.14  | Missing CPU/memory limits, PID cgroup limits, exposed ports, and read/write FS   |
+| 5.25–5.28  | Containers not restricted from acquiring additional privileges                   |
+
+---
+
+## 1.3.2. Docker Image Vulnerabilities (Docker Scout)
+
+### Image Scanned: `mywebapp:latest`  
+**Base image:** `python:3.9-alpine`
+
+###  Vulnerabilities Found:
+- **High:** 3
+- **Medium:** 1     
 
 ## Part 2: Secure the App and Container
 
