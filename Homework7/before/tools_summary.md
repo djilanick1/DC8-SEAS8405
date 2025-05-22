@@ -12,3 +12,4 @@ Tools Summary installed on the Bastion EC2
 | Node.js    | Server-side JavaScript runtime | Secures web applications                      |
 | Python 3   | Programming and scripting      | Automates security tasks, simulates attacks   |
 | Git        | Version control                | Supports secure code management               |
+| DCompose   | Docker compose                 | Running containerized application             |
