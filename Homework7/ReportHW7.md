@@ -25,9 +25,7 @@ The purpose of this assignment is to step into the cybersecurity architects shoe
    - Test the endpoints: `/`, `/ping?ip=8.8.8.8`, and `/calculate?expr=2+3`.
      ![image](https://github.com/user-attachments/assets/f29e71e3-aa4a-41f4-9b20-3d49623cf68f)
 
-When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; this means the Flask app crashed while trying to process the request to /calculate?expr=2+3. This is due to the fact that passing 2+3 in the query string is one thing, but the + is being interpreted as a space, not as the + character. In URLs, + is URL-encoded as %2B. To correct this, i ran 
-ubuntu@ip-172-31-85-161:~/DC8-SEAS8405/Homework7/before$ curl "http://localhost:15000/calculate?expr=2%2B3"
-5ubuntu@ip-172-31-85-161:~/DC8-SEAS8405/Homework7/before$; result 5
+When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; this means the Flask app crashed while trying to process the request to /calculate?expr=2+3. This is due to the fact that passing 2+3 in the query string is one thing, but the + is being interpreted as a space, not as the + character. In URLs, + is URL-encoded as %2B. To correct this, i ran $curl "http://localhost:15000/calculate?expr=2%2B3" result 5
 
 
 3. **Initial Scanning:**
