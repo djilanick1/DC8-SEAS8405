@@ -74,16 +74,18 @@ The available app.py code in the after folder has the required securities implem
 - input validation: / validates with .isalnum() and /ping uses ipaddress.ip_address() to reject invalid IPs.
 - App binds to 127.0.0.1 via app.run(host='127.0.0.1', port=5000) instead of 0.0.0.0
 
-3. **Docker Hardening:**
-   - Use a minimal base image.
-   - Ensure the app runs as a non-root user.
-   - Add a `HEALTHCHECK` directive.
-   - Implement multi-stage builds if possible.
+2. **Docker Hardening:**
+   The modified Dockerfile in the after folder:
+   - Uses python:3.13-alpine, which is a minimal Alpine-based image; ensure the app runs as a non-root user.
+   - Adds appuser with adduser -D and switches with USER appuser
+   - Implements a HEALTHCHECK using curl -f http://localhost:5000/
+   - Implements multi-stage builds help reduce image size further by separating build and runtime layers.
 
-4. **docker-compose.yml Improvements:**
-   - Add `read_only`, `security_opt`, `mem_limit`, and `pids_limit`.
-   - Restrict port exposure to `127.0.0.1`.
-   - Use `.env` files for secret handling.
+3. **docker-compose.yml Improvements:**
+The modified docker-compose.yaml in the after folder: 
+   - Adds `read_only`, `security_opt`, `mem_limit`, and `pids_limit`.
+   - Restricts port exposure to `127.0.0.1`.
+   - Uses `.env` files for secret handling; under db service with env_file
 
 ## Part 3: Threat Modeling
 
