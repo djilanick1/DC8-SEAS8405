@@ -20,7 +20,7 @@ run:
 
 # Scan the built image for vulnerabilities
 scan:
-	docker scout recommendations mywebapp:latest
+	docker-scout recommendations mywebapp:latest
 
 # Docker Compose commands
 build:
