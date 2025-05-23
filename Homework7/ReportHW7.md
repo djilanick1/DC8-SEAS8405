@@ -86,6 +86,8 @@ The modified docker-compose.yaml in the after folder:
    - Adds `read_only`, `security_opt`, `mem_limit`, and `pids_limit`.
    - Restricts port exposure to `127.0.0.1`.
    - Uses `.env` files for secret handling; under db service with env_file
+To test this modified files, i had to stop the containers currently running from the before folder, prune them to delete them and test the newly secured app; i had to do this because i was having this error: failed to bind host port for 127.0.0.1:15000:172.21.0.2:5000/tcp: address already in use
+
 
 ## Part 3: Threat Modeling
 
