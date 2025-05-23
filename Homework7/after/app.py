@@ -33,9 +33,9 @@ def ping():
 def calculate():
     expression = request.args.get('expr')
     try:
-        result = ast.literal_eval(expression)
+        result = simple_eval(expression)
         return str(result)
-    except (SyntaxError, ValueError):
+    except:
         return jsonify({"error": "Invalid expression"}), 400
 
 if __name__ == '__main__':
