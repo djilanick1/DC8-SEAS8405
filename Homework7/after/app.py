@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 import os
 import subprocess
+import ast
 import ipaddress
-from simpleeval import SimpleEval, FunctionNotDefined
 
 app = Flask(__name__)
 
@@ -26,25 +26,16 @@ def ping():
         return result
     except ValueError:
         return jsonify({"error": "Invalid IP address"}), 400
-    except subprocess.CalledProcessError as e:
-        return jsonify({"error": "Ping failed", "details": str(e)}), 500
 
-# Secure math expression evaluator
+# Secure calculate route using ast.literal_eval instead of eval
 @app.route('/calculate')
 def calculate():
     expression = request.args.get('expr')
-    if not expression:
-        return jsonify({"error": "No expression provided"}), 400
-
-    # Replace spaces (which may have come from '+' in URL) with '+'
-    expression = expression.replace(' ', '+')
-
-    s = SimpleEval()
     try:
-        result = s.eval(expression)
-        return jsonify({"result": result})
-    except (FunctionNotDefined, ValueError, SyntaxError, TypeError, ZeroDivisionError) as e:
-        return jsonify({"error": "Invalid expression", "details": str(e)}), 400
+        result = ast.literal_eval(expression)
+        return str(result)
+    except (SyntaxError, ValueError):
+        return jsonify({"error": "Invalid expression"}), 400
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000) # Bind to localhost instead of all interfaces
+    app.run(host='127.0.0.1', port=5000)  # Bind to localhost instead of all interfaces
