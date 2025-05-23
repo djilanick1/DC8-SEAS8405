@@ -5,7 +5,7 @@ services:
     ports:
       - "127.0.0.1:15000:5000"
     volumes:
-      - .:/app:ro
+      - .:/app:rw
     command: flask run --host=0.0.0.0 --port=5000
     env_file:
       - .env
