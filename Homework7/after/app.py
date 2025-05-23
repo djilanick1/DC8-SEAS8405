@@ -3,6 +3,7 @@ import os
 import subprocess
 import ast
 import ipaddress
+from simpleeval import simple_eval # this needed for securely sanitize inputs and evaluate literals directly
 
 app = Flask(__name__)
 
