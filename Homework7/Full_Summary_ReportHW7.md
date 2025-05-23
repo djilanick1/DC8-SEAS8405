@@ -105,21 +105,6 @@ Check results in deliverables/threat_model.md.
 ## Part 5: Recording the Simulation
 Video available in deliverables
 
-1. **Record Your Screen:**
-   - Use OBS or QuickTime.
-   - Include:
-     - Initial scan and vulnerable app behavior.
-     - Code and config remediation.
-     - Threat model explanation.
-     - Re-scans showing reduced vulnerabilities.
-
-2. **Add Commentary:**
-   - Use voiceover or annotations.
-   - Describe what you are doing and why.
-
-3. **Export:**
-   - Save as MP4.
-
 ## Part 6: Summary Report
 
 ## Steps Taken
