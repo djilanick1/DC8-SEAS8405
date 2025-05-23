@@ -31,11 +31,14 @@ def ping():
 
 # Secure math expression evaluator
 @app.route('/calculate')
+def calculate():
     expression = request.args.get('expr')
     if not expression:
         return jsonify({"error": "No expression provided"}), 400
-    # Handle '+' encoded as space
+
+    # Replace spaces (which may have come from '+' in URL) with '+'
     expression = expression.replace(' ', '+')
+
     s = SimpleEval()
     try:
         result = s.eval(expression)
