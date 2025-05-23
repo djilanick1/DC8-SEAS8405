@@ -31,16 +31,16 @@ def ping():
 
 # Secure math expression evaluator
 @app.route('/calculate')
-def calculate():
     expression = request.args.get('expr')
     if not expression:
         return jsonify({"error": "No expression provided"}), 400
-
+    # Handle '+' encoded as space
+    expression = expression.replace(' ', '+')
     s = SimpleEval()
     try:
         result = s.eval(expression)
         return jsonify({"result": result})
-    except (FunctionNotDefined, ValueError, SyntaxError) as e:
+    except (FunctionNotDefined, ValueError, SyntaxError, TypeError, ZeroDivisionError) as e:
         return jsonify({"error": "Invalid expression", "details": str(e)}), 400
 
 if __name__ == '__main__':
