@@ -3,23 +3,34 @@ services:
     build: .
     image: mywebapp
     ports:
-      - "15000:5000"
+      - "127.0.0.1:15000:5000"
     volumes:
-      - .:/app
+      - .:/app:ro
     command: flask run --host=0.0.0.0 --port=5000
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
+    env_file:
+      - .env
     depends_on:
       - db
+    read_only: true
+    mem_limit: 512m
+    pids_limit: 100
+    security_opt:
+      - no-new-privileges:true
     networks:
       - frontend
+
   db:
     image: postgres:13
     env_file:
       - .env
+    read_only: true
+    mem_limit: 512m
+    pids_limit: 100
+    security_opt:
+      - no-new-privileges:true
     networks:
       - backend
+
 networks:
   frontend:
   backend:
