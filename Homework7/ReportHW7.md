@@ -68,19 +68,19 @@ When testing endpoint /calculate?expr=2+3, i had a 500 Internal Server Error; th
 ## Part 2: Secure the App and Container
 
 1. **Code Remediation:**
-   - Refactor `app.py` to:
-     - Eliminate hardcoded passwords.
-     - Replace `eval()` with `ast.literal_eval`.
-     - Validate all inputs.
-     - Restrict Flask to localhost.
+The available app.py code in the after folder has the required securities implemented:
+- the use of os.environ.get('PASSWORD', 'default_password') instead of a hardcoded string; this can also be overridden with an environment variable.
+- ast.literal_eval() is used in /calculate, which is safe for basic math expressions.
+- input validation: / validates with .isalnum() and /ping uses ipaddress.ip_address() to reject invalid IPs.
+- App binds to 127.0.0.1 via app.run(host='127.0.0.1', port=5000) instead of 0.0.0.0
 
-2. **Docker Hardening:**
+3. **Docker Hardening:**
    - Use a minimal base image.
    - Ensure the app runs as a non-root user.
    - Add a `HEALTHCHECK` directive.
    - Implement multi-stage builds if possible.
 
-3. **docker-compose.yml Improvements:**
+4. **docker-compose.yml Improvements:**
    - Add `read_only`, `security_opt`, `mem_limit`, and `pids_limit`.
    - Restrict port exposure to `127.0.0.1`.
    - Use `.env` files for secret handling.
