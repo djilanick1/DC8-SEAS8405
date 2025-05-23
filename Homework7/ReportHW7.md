@@ -88,7 +88,7 @@ The modified docker-compose.yaml in the after folder:
    - Uses `.env` files for secret handling; under db service with env_file
 To test this modified files, i had to stop the containers currently running from the before folder, prune them to delete them and test the newly secured app; i had to do this because i was having this error: failed to bind host port for 127.0.0.1:15000:172.21.0.2:5000/tcp: address already in use
 Also i ran into an issue where after running the make dbuild, no containers (web, db) was created; i checked the logs (docker logs after-web-1; docker logs after-db-1); to fix the app i add to install the pyhton virtual environment and to fix the db, i add simpleeval to requirements.txt, modify the docker file and docker-compose aswell (see in the after folder).
-
+After analyzing the vulnerability scan result, only 3 HIGH remain: 3 High, 1 Medium CVE in python:3.9-alpine base image; the easy fix is to use the base alpine base image with no HIGH vulnerabilities: tag 3.13 and add it into the Dockerfile: FROM python:3.13-alpine
 
 ## Part 3: Threat Modeling
 
