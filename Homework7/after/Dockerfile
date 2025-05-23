@@ -4,7 +4,8 @@ FROM python:3.13-alpine AS builder
 WORKDIR /app
 COPY . /app
 RUN pip install simpleeval
-RUN pip install --user -r requirements.txt
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Stage 2 - Runtime
 FROM python:3.13-alpine
