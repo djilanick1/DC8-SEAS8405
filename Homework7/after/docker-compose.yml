@@ -3,34 +3,34 @@ services:
     build: .
     image: mywebapp
     ports:
-      - "127.0.0.1:15000:5000"
-    volumes:
-      - .:/app:rw
-    command: flask run --host=0.0.0.0 --port=5000
-    env_file:
-      - .env
+      - "15000:5000"
     depends_on:
       - db
-    read_only: true
-    mem_limit: 512m
-    pids_limit: 100
-    security_opt:
-      - no-new-privileges:true
     networks:
       - frontend
+      - backend
+    environment:
+      FLASK_APP: app.py
+      FLASK_RUN_HOST: 0.0.0.0
+    command: flask run --host=0.0.0.0 --port=5000
 
   db:
     image: postgres:13
-    env_file:
-      - .env
-    read_only: true
-    mem_limit: 512m
-    pids_limit: 100
-    security_opt:
-      - no-new-privileges:true
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
       - backend
+
+volumes:
+  pgdata:
 
 networks:
   frontend:
   backend:
+
