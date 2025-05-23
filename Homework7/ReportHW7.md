@@ -87,7 +87,8 @@ The modified docker-compose.yaml in the after folder:
    - Restricts port exposure to `127.0.0.1`.
    - Uses `.env` files for secret handling; under db service with env_file
 To test this modified files, i had to stop the containers currently running from the before folder, prune them to delete them and test the newly secured app; i had to do this because i was having this error: failed to bind host port for 127.0.0.1:15000:172.21.0.2:5000/tcp: address already in use
-Also i ran into an issue where after running the make dbuild, no containers (web, db) was created; i checked the logs (docker logs after-web-1; docker logs after-db-1); to fix the app i add to install the pyhton virtual environment and to fix the db, i add to change the mounted volume from RO to RW, risky but i had to his in the docker-compose.yml
+Also i ran into an issue where after running the make dbuild, no containers (web, db) was created; i checked the logs (docker logs after-web-1; docker logs after-db-1); to fix the app i add to install the pyhton virtual environment and to fix the db, i add simpleeval to requirements.txt, modify the docker file and docker-compose aswell (see in the after folder).
+
 
 ## Part 3: Threat Modeling
 
