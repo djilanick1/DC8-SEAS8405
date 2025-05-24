@@ -103,7 +103,7 @@ Check results in deliverables/threat_model.md.
  The script does fully meet the hardening criteria; available in deliverables folder.
 
 ## Part 5: Recording the Simulation
-Video available in deliverables
+Video available on youtube here https://youtu.be/Ow6jdTaZfX4
 
 ## Part 6: Summary Report
 
