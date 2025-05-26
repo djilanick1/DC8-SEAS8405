@@ -4,7 +4,7 @@ from functools import wraps
 import jwt
 
 app = Flask(__name__)
-ISSUER = "http://keycloak:8080/realms/demo-realm"
+ISSUER = "http://keycloak:8080/realms/master-realm"
 CLIENT_ID = "flask-client"
 
 def token_required(f):
