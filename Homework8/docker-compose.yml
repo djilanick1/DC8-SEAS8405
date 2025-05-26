@@ -20,9 +20,9 @@ services:
     build: ./flask-app
     environment:
       FLASK_ENV: development
-      KEYCLOAK_REALM: demo-realm
+      KEYCLOAK_REALM: master-realm
       KEYCLOAK_CLIENT_ID: flask-client
-      KEYCLOAK_ISSUER: http://keycloak:8080/realms/demo-realm
+      KEYCLOAK_ISSUER: http://keycloak:8080/realms/master-realm
     depends_on:
       - keycloak
     ports:
