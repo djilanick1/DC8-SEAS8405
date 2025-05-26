@@ -9,7 +9,7 @@ done
 
 echo "Configuring Keycloak..."
 
-docker exec -it $(docker ps -qf "name=keycloak") /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080 --realm master --user admin --password admin
+docker exec -it $(docker ps -qf "name=keycloak") /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8180 --realm master --user admin --password admin
 
 docker exec -it $(docker ps -qf "name=keycloak") /opt/keycloak/bin/kcadm.sh create realms -s realm=master-realm -s enabled=true
 
