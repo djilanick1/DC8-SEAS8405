@@ -34,16 +34,14 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
-    <build>
         <plugins>
-            <plugin>
-                <groupId>...</groupId>
-                <artifactId>...</artifactId>
-                <version>...</version>
-           </plugin>
-       </plugins>
-   </build>
+           <plugin>
+               <groupId>...</groupId>
+               <artifactId>...</artifactId>
+               <version>...</version>
+          </plugin>
+      </plugins>
+  </build>
 
 </project>
 
