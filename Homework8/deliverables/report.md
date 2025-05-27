@@ -54,7 +54,7 @@ The token validation is implemented with this function: token_required(f); to en
 
 ---
 
-##STRIDE Breakdown
+## STRIDE Breakdown
 
 | STRIDE Category        | Threat                         | Description | Example in System | Mitigation |
 |------------------------|--------------------------------|-------------|--------------------|------------|
@@ -85,4 +85,9 @@ The token validation is implemented with this function: token_required(f); to en
 - Deploy behind **HTTPS** using NGINX reverse proxy or AWS ALB with ACM.
 - Apply **role-based access control** based on scopes defined in Keycloak.
   
+## Conclusion
+Setting up this IAM achitecture using Keycloak was a great learning experience; i had to open 3 termianls to ensure everything will run smoothly. This can be definitely improved to run on a production environment.
 
+## References
+- Lecture week8 SEAS8405
+- Keycloack documentation
