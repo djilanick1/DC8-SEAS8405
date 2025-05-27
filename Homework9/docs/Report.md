@@ -16,8 +16,6 @@ Also, Ports 8080 and 389 are open in your EC2 Security Group (for the app and LD
 
 ---
 
-
-
 ## Part 1: Exploitation (MITRE ATT&CK)
 - Vulnerable version of Log4j 2.14.1 logs unsanitized input.
 - Exploit performed using JNDI payload and attacker controlled LDAP server.
