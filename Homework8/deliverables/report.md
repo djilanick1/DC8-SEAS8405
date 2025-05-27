@@ -39,8 +39,9 @@ The token validation is implemented with this function: token_required(f); to en
 ### 3. **Test the setup:**
   Although i did everything manually, i loaded a scripts to automate the process in Homework8/keycloack
 
-  Test the API with and without a valid token to ensure access controls are enforced
+  Test the API with and without a valid token to ensure access controls are enforced; we can see on this image that testing the /public returens 200 but testing the /protected returns 404, 401.
 
+  ![image](https://github.com/user-attachments/assets/f49ad470-340d-4ed0-9f29-d9f5786a159c)
 
 
 
