@@ -22,7 +22,7 @@ This project demonstrates the exploitation and mitigation of the Log4Shell vulne
 
 ### Part 1: Exploitation (MITRE ATT&CK)
 - Vulnerable version of Log4j 2.14.1 logs unsanitized input.
-- Exploit performed using JNDI payload and attacker-controlled LDAP server.
+- Exploit performed using JNDI payload and attacker controlled LDAP server.
 
 ### Part 2: Defense (MITRE DEFEND)
 - Log4j upgraded to 2.17.0.
@@ -39,7 +39,7 @@ This project demonstrates the exploitation and mitigation of the Log4Shell vulne
 ## Lessons Learned
 
 - Logging libraries must be treated as part of the attack surface.
-- Validate all input—even when passed to internal services.
+- Validate all input even when passed to internal services.
 - MITRE frameworks provide a clear guide for security lifecycle management.
 
 ---
