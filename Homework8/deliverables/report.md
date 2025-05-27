@@ -49,6 +49,40 @@ The token validation is implemented with this function: token_required(f); to en
 
 1. **Threat Modeling:**
 
+***Methodology***: STRIDE  
+***Architecture***: Keycloak (OIDC) + Flask API + Docker Compose
+
+---
+
+###STRIDE Breakdown
+
+| STRIDE Category        | Threat                         | Description | Example in System | Mitigation |
+|------------------------|--------------------------------|-------------|--------------------|------------|
+| **S: Spoofing**        | Identity Forgery               | Attacker impersonates a legitimate user or service. | Forged JWT sent to Flask API. | Verify JWT signature with Keycloak public keys and validate `aud` & `iss` claims. |
+| **T: Tampering**       | Token/Data Manipulation        | Tokens or requests are altered in transit or memory. | JWT contents altered client-side. | Use RS256-signed JWTs; never trust client-side claims. |
+| **R: Repudiation**     | Action Denial                  | Lack of audit logs prevents accountability. | No logs for API access or token use. | Enable logging in Flask and event auditing in Keycloak. |
+| **I: Information Disclosure** | Data/Token Leak         | Sensitive information exposed via logs or responses. | Access token logged by Flask. | Avoid logging Authorization headers or JWTs. |
+| **D: Denial of Service** | Resource Exhaustion          | Abusing token endpoint or API to cause crash. | Multiple invalid token requests to Flask. | Rate limit endpoints; use fail2ban or circuit breakers. |
+| **E: Elevation of Privilege** | Privilege Escalation     | Misconfigured roles allow over-permissioned access. | `flask-client` can modify Keycloak. | Assign minimal scopes/roles; enforce role checks in Flask. |
+
+---
+
+### Key Components at Risk
+
+| Component      | Risk Vector                               | Mitigation Strategy |
+|----------------|--------------------------------------------|---------------------|
+| Keycloak       | Brute-force login or exposed endpoints     | Use CAPTCHA, lockout policy, secure admin console |
+| Flask API      | No RBAC enforcement                        | Parse roles from JWT (`realm_access.roles`) |
+| JWT Storage    | Insecure session/token handling            | Use `HttpOnly` cookies or Authorization headers |
+| Docker Config  | Containers run as root or leak secrets     | Use `USER`, `.env`, and `secrets:` properly |
+| Network        | Token interception                         | Enforce HTTPS via NGINX or ALB+ACM |
+
 2. **Mitigation Strategies:**
+- Use **short-lived access tokens** and **refresh tokens** with revocation.
+- Enable **audit logging** in both Keycloak and Flask.
+- Implement **rate limiting** and abuse protection on Flask endpoints.
+- Use **non-root containers**, restrict network bindings (127.0.0.1).
+- Deploy behind **HTTPS** using NGINX reverse proxy or AWS ALB with ACM.
+- Apply **role-based access control** based on scopes defined in Keycloak.
   
 
