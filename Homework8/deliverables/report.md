@@ -91,3 +91,4 @@ Setting up this IAM achitecture using Keycloak was a great learning experience; 
 ## References
 - Lecture week8 SEAS8405
 - Keycloack documentation
+- recording is available here: https://youtu.be/kQwsua9JF7c
