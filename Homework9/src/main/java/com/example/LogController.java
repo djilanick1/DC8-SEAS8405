@@ -18,8 +18,8 @@ public class LogController {
 }
 
 @SpringBootApplication
-public class Log4shellDemoApplication {
+public class LogController {
     public static void main(String[] args) {
-        SpringApplication.run(Log4shellDemoApplication.class, args);
+        SpringApplication.run(LogController.class, args);
     }
 }
