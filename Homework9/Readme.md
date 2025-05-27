@@ -1,4 +1,4 @@
-# Week8: Log4Shell Vulnerability Homework
+# Week9: Log4Shell Vulnerability Homework
 
 This project demonstrates the exploitation and mitigation of the Log4Shell vulnerability (CVE-2021-44228) using a vulnerable Java Spring Boot application deployed via Docker Compose.
 
