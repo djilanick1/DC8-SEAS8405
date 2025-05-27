@@ -54,7 +54,7 @@ The token validation is implemented with this function: token_required(f); to en
 
 ---
 
-###STRIDE Breakdown
+##STRIDE Breakdown
 
 | STRIDE Category        | Threat                         | Description | Example in System | Mitigation |
 |------------------------|--------------------------------|-------------|--------------------|------------|
