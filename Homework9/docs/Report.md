@@ -64,19 +64,29 @@ Testing with normal input returns Logged: Hello World!
 
 
 ## Part 3: Response (MITRE REACT)
-- Detect: Logs examined for exploit traces
+- Detect: Logs examined for exploit traces: docker logs $(docker ps -qf "name=app") 2>&1 | grep jndi
+![image](https://github.com/user-attachments/assets/e4351711-9a18-4c52-832a-02a0572a6bd1)
+
+ This returned nothing, which is good sign, because we are currently running the patched app; it also means the patched application successfully blocked the malicious input and did not log or process the ${jndi:...} payload.
+
+
 - Contain: Vulnerable container stopped
-- Eradicate: Patched container deployed
-- Recover: System restored with mitigation verified
+  If we were running the unpatched app, it would have been good to contain the vulnerable container by running: docker-compose down
+  
+- Eradicate: Patched container deployed; here we have to ensure that patched code is deployed. We did this on part2
+  
+- Recover: System restored with mitigation verified; this consists of restart and test with clean input: docker-compose up --build -d
+This was also done in part2
 
 ---
 
 ## Conclusion and Lessons Learned
 
-- Logging libraries must be treated as part of the attack surface.
-- Validate all input even when passed to internal services.
-- MITRE frameworks provide a clear guide for security lifecycle management.
+Working through the Log4Shell vulnerability really drove home some key points about building secure software. It's easy to forget about things like logging libraries (like Log4j), but they're definitely part of what attackers can target. As we saw, just one little piece of data that's not handled correctly can open the door for someone to run code remotely if the logging system has a flaw. This really shows why it's so important to keep all our software up to date and to know what the third-party tools we're using actually do.
 
+Plus, it's clear that we absolutely have to check everything that comes into our applications, even if it's going to internal parts. The fixed version we looked at successfully stopped malicious attacks just by cleaning up the input it received, proof that even simple checks can make a big difference!
+
+Lastly, tools like MITRE ATT&CK and D3FEND give us a great way to think about security throughout the whole lifecycle, from finding weaknesses to fixing them and responding if something happens. They're super helpful for anyone working in cybersecurity today. This whole exercise really reinforces that being proactive with our defenses, having a good understanding of how our systems are put together, and constantly keeping an eye on things are crucial for keeping our systems secure
 ---
 
 ## References
