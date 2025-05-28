@@ -46,6 +46,7 @@ the file start_exploit.sh available in the exploit folder automates all this pro
 To do this, we need to:
 - Replace vulnerable LogController.java with patched/LogController.java.
 - Upgrade log4j version to 2.17.0 in pom.xml.
+before: ![image](https://github.com/user-attachments/assets/70fa2a88-26a0-4531-af5c-fcfacad41415)       after: ![image](https://github.com/user-attachments/assets/cc7b0dfe-1943-4a31-a93d-7d90533207ea) 
 - Rebuild and restart:
 
 ## Part 3: Response (MITRE REACT)
