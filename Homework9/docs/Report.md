@@ -87,6 +87,8 @@ Working through the Log4Shell vulnerability really drove home some key points ab
 Plus, it's clear that we absolutely have to check everything that comes into our applications, even if it's going to internal parts. The fixed version we looked at successfully stopped malicious attacks just by cleaning up the input it received, proof that even simple checks can make a big difference!
 
 Lastly, tools like MITRE ATT&CK and D3FEND give us a great way to think about security throughout the whole lifecycle, from finding weaknesses to fixing them and responding if something happens. They're super helpful for anyone working in cybersecurity today. This whole exercise really reinforces that being proactive with our defenses, having a good understanding of how our systems are put together, and constantly keeping an eye on things are crucial for keeping our systems secure
+
+
 ---
 
 ## References
