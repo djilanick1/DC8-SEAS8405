@@ -94,6 +94,7 @@ Lastly, tools like MITRE ATT&CK and D3FEND give us a great way to think about se
 
 ## References
 
+- homework9 video: https://youtu.be/ptPj2rwUUws
 - [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
 - [MITRE ATT&CK](https://attack.mitre.org/)
 - [MITRE DEFEND](https://defend.mitre.org/)
