@@ -1,6 +1,7 @@
 # Week9: Log4Shell Vulnerability Homework
 
-Introduction: This project demonstrates the exploitation and mitigation of the Log4Shell vulnerability (CVE-2021-44228) using a vulnerable Java Spring Boot application deployed via Docker Compose. The objectives of this homework are:
+## Introduction 
+This project demonstrates the exploitation and mitigation of the Log4Shell vulnerability (CVE-2021-44228) using a vulnerable Java Spring Boot application deployed via Docker Compose. The objectives of this homework are:
 
 - Simulate a real-world Log4Shell exploit scenario
 - Apply MITRE ATT&CK, DEFEND, and REACT frameworks
