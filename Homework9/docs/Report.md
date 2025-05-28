@@ -42,6 +42,10 @@ the file start_exploit.sh available in the exploit folder automates all this pro
 ## Part 2: Defense (MITRE DEFEND)
 - Log4j upgraded to 2.17.0.
 - Input validation implemented to block JNDI patterns.
+To do this, we need to:
+- Replace vulnerable LogController.java with patched/LogController.java.
+- Upgrade log4j version to 2.17.0 in pom.xml.
+- Rebuild and restart:
 
 ## Part 3: Response (MITRE REACT)
 - Detect: Logs examined for exploit traces
